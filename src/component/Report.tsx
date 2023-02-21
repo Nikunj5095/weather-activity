@@ -71,7 +71,7 @@ export default function Report() {
                   });
                 }
               }}>
-                <th scope="row"><input type="checkbox" name="chk" id={"chk-" + i} checked={x.checked} onChange={(e) => x.checked = e.target.checked} /></th>
+                <th scope="row"><input type="checkbox" name="chk" id={"chk-" + i} checked={x.checked} onChange={(e) => { x.checked = e.target.checked; setCoordinateData([...coordinateData]); }} /></th>
                 <td>{x.cityName}</td>
                 <td>{x.includedData}</td>
                 <td>{x.latitude + ', ' + x.longitude}</td>
