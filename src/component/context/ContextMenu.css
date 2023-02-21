@@ -1,0 +1,24 @@
+.contect-menu {
+  position: fixed;
+  z-index: 11;
+  background: #ececec;
+  width: 250px;
+  border-radius: 5px;
+}
+
+.contect-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contect-menu ul li {
+  padding: 10px;
+}
+
+.contect-menu ul li:hover {
+  background-color: gray;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
