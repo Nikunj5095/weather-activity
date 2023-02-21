@@ -60,8 +60,8 @@ export default function Report() {
             </tr>
           </thead>
           <tbody>
-            {coordinateData ? coordinateData.map((x, i) =>
-              <tr key={i} onContextMenu={(e) => {
+            {coordinateData && coordinateData.length > 0 ? coordinateData.map((x, i) =>
+              <tr key={i} className={x.checked ? 'selected' : ''} onContextMenu={(e) => {
                 if (coordinateData.some(x => x.checked)) {
                   e.preventDefault();
                   setClicked(true);
@@ -85,7 +85,7 @@ export default function Report() {
               </tr>
             ) :
               <tr>
-                <td colSpan={7} className='text-center'>No Data available</td>
+                <td colSpan={7} className='text-center'>No data available</td>
               </tr>}
           </tbody>
         </table>
