@@ -2,7 +2,8 @@ export const config: any = {
   series: [],
   options: {
     chart: {
-      height: 350,
+      width: '100%',
+      height: 'auto',
       type: 'area',
       zoom: {
         enabled: false

@@ -249,12 +249,12 @@ export default function Home() {
             <button className="btn btn-primary" type="submit" onClick={() => saveCoordinateData()}>Save</button>
           </div>
           {chartConfig.map((x, i) =>
-            <div className="mixed-chart mt-2" key={'map-' + i}>
+            <div className="col-md-6 col-12 mt-2" key={'map-' + i}>
               <Chart
                 options={x.options}
                 series={x.series}
                 type={x.options.chart.type}
-                width="500"
+                // width="500"
               />
             </div>
           )}
