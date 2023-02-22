@@ -12,11 +12,10 @@ const { allowedMaxDays } = DateRangePicker;
 
 export default function Home() {
   const [coordinates, setCoordinates] = useState([new CoordinatesDetail()]);
-  // const [temperature, setTemperature] = useState<boolean>(false);
-  // const [relativeHumidity, setRelativeHumidity] = useState<boolean>(false);
   const [cities, setCities] = useState<Array<CitiesModel>>([]);
   const [isShowLoder, setIsShowLoder] = useState<boolean>(false);
   const [chartConfig, setChartConfig] = useState<Array<typeof config>>([]);
+  const [width, setWidth] = useState<number>(window.innerWidth);
   const location = useLocation();
 
   useEffect(() => {
@@ -31,7 +30,15 @@ export default function Home() {
       getWeatherDetail(t);
     }
     window.history.replaceState({}, document.title);
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.addEventListener('resize', handleWindowSizeChange);
+    }
   }, []);
+
+  const handleWindowSizeChange = () => {
+    setWidth(window.innerWidth);
+  }
 
   const notify = (str: string) => toast(str);
 
@@ -181,7 +188,7 @@ export default function Home() {
         {coordinates.map((x, i) =>
           <div className="row m-0 pt-1" key={i}>
             <div className="col-12"><strong>Coordinate - {i + 1}</strong></div>
-            <div className="col-lg-2 col-sm-6 col-12">
+            <div className="col-md-2 col-sm-6 col-12">
               <form>
                 <div className="mb-3">
                   <label htmlFor="latitude" className="form-label">Latitude</label>
@@ -191,7 +198,7 @@ export default function Home() {
                 </div>
               </form>
             </div>
-            <div className="col-lg-2 col-sm-6 col-12">
+            <div className="col-md-2 col-sm-6 col-12">
               <form>
                 <div className="mb-3">
                   <label htmlFor="longitude" className="form-label">Longitude</label>
@@ -202,7 +209,7 @@ export default function Home() {
               </form>
             </div>
 
-            <div className="col-lg-3 col-sm-6 col-12">
+            <div className="col-md-3 col-sm-6 col-12">
               <label htmlFor="searchable-dd" className="form-label">City</label>
               <SearchableDropdown
                 options={cities}
@@ -214,12 +221,12 @@ export default function Home() {
                 handleQueryChange={(val: string) => getCities(val)}
               />
             </div>
-            <div className="col-lg-5 col-sm-6 col-12">
+            <div className="col-md-5 col-sm-6 col-12">
               <label htmlFor="dateRange" className="form-label">Date Range</label><br />
-              <DateRangePicker id="dateRange" disabledDate={allowedMaxDays ? allowedMaxDays(7) : undefined} value={x.dateRange}
+              <DateRangePicker id="dateRange" showOneCalendar={true} disabledDate={allowedMaxDays ? allowedMaxDays(7) : undefined} value={x.dateRange}
                 onChange={(e) => coordinateChanage(x, 'dateRange', e)} />
             </div>
-            <div className="col-10">
+            <div className="col-12">
               <label><strong>Hourly Options:</strong></label><br />
               <input type="checkbox" className="form-check-input mx-1" id={"temp-check-" + i}
                 checked={x.temperature} onChange={(e) => coordinateChanage(x, 'temperature', e.target.checked)} />
@@ -233,13 +240,12 @@ export default function Home() {
         )}
 
         <div className="row m-0">
-          <div className="col-10">
-
+          <div className="col-6 col-md-10">
           </div>
-          <div className="col-1">
+          <div className="col-3 col-md-1">
             <button className="btn btn-primary" type="button" onClick={() => addCoordinate()}>Add</button>
           </div>
-          <div className="col-1">
+          <div className="col-3 col-md-1">
             <button className="btn btn-primary" type="submit" onClick={() => saveCoordinateData()}>Save</button>
           </div>
           {chartConfig.map((x, i) =>

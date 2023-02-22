@@ -15,3 +15,9 @@ code {
 .selected {
   background: #9fd2ff;
 }
+
+@media (max-width:576px) {
+  .rs-picker.rs-picker-daterange {
+    width: 100%;
+  }
+}
